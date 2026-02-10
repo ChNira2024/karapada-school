@@ -31,6 +31,9 @@ Then copy this password and paste in jenkins starting then create new password..
 C:\Users\niran>docker stop jenkins
 jenkins
 
+C:\Users\niran>docker start jenkins
+jenkins
+
 C:\Users\niran>docker rm jenkins
 jenkins
 --------------------------------------------------------
