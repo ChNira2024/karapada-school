@@ -36,6 +36,7 @@ public class StudentController {
 
     @GetMapping("get-id/{id}")
     public Student getStudent(@PathVariable("id") Long id) {
+    	System.out.println("id"+id);
         return iStudentService.getStudentById(id);
     }
 }
