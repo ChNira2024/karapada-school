@@ -1,0 +1,100 @@
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .metadata/
+        docker/
+        kafka-order-processing-system/
+        karapada-school/
+        prometheus-config-yml/
+        spboot2.x-byJavaTechieWar/
+        spboot4.x-project/
+        spring-prometheus-grafana/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$ git init
+Reinitialized existing Git repository in C:/Workspace/.git/
+
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$ git add karapada-school/
+warning: in the working copy of 'karapada-school/.gitattributes', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'karapada-school/.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'karapada-school/.mvn/wrapper/maven-wrapper.properties', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'karapada-school/mvnw.cmd', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'karapada-school/pom.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'karapada-school/src/main/java/com/karapada/project/KarapadaSchoolApplication.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'karapada-school/src/main/resources/application.properties', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'karapada-school/src/test/java/com/niranjana/project/KarapadaSchoolApplicationTests.java', LF will be replaced by CRLF the next time Git touches it
+
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$ git commit -m "spboot project"
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'niran@NIRANJAN-LAP.(none)')
+
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$ git config --global user.email "niranjanacharty2013@gmail.com"
+
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$ git config --global user.name "niranjana"
+
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$ git commit -m "spboot project"
+[master (root-commit) 725c23b] spboot project
+ 16 files changed, 848 insertions(+)
+ create mode 100644 karapada-school/.gitattributes
+ create mode 100644 karapada-school/.gitignore
+ create mode 100644 karapada-school/.mvn/wrapper/maven-wrapper.properties
+ create mode 100644 karapada-school/Jenkinsfile
+ create mode 100644 karapada-school/db-query
+ create mode 100644 karapada-school/mvnw
+ create mode 100644 karapada-school/mvnw.cmd
+ create mode 100644 karapada-school/pom.xml
+ create mode 100644 karapada-school/src/main/java/com/karapada/project/KarapadaSchoolApplication.java
+ create mode 100644 karapada-school/src/main/java/com/karapada/project/controller/StudentController.java
+ create mode 100644 karapada-school/src/main/java/com/karapada/project/entity/Student.java
+ create mode 100644 karapada-school/src/main/java/com/karapada/project/repository/StudentRepository.java
+ create mode 100644 karapada-school/src/main/java/com/karapada/project/service/IStudentService.java
+ create mode 100644 karapada-school/src/main/java/com/karapada/project/service/impl/StudentServiceImpl.java
+ create mode 100644 karapada-school/src/main/resources/application.properties
+ create mode 100644 karapada-school/src/test/java/com/niranjana/project/KarapadaSchoolApplicationTests.java
+
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$ git remote add origin https://github.com/ChNira2024/karapada-school.git
+
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$ git push -u origin main
+
+
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$ git push -u origin master
+info: please complete authentication in your browser...
+Enumerating objects: 38, done.
+Counting objects: 100% (38/38), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (27/27), done.
+Writing objects: 100% (38/38), 12.33 KiB | 841.00 KiB/s, done.
+Total 38 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/ChNira2024/karapada-school.git
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.
+
+niran@NIRANJAN-LAP MINGW64 /c/Workspace (master)
+$

@@ -1,0 +1,54 @@
+Run Jenkins  inside docker::-
+---------------------------
+C:\Users\niran>docker pull jenkins/jenkins:lts
+lts: Pulling from jenkins/jenkins
+17e22d939f17: Pull complete
+57364cf49183: Pull complete
+e92c5cf141dc: Pull complete
+53c88f1dfeb7: Pull complete
+7ad60f966cc5: Pull complete
+99ddb13f3ebf: Pull complete
+ed559592686a: Pull complete
+406f94702a48: Pull complete
+39483126681f: Pull complete
+5b302cbb8ad3: Pull complete
+213d96e0ed06: Pull complete
+a1c44ba8dd7a: Pull complete
+163b2d8d19a6: Download complete
+Digest: sha256:d1ea795c6facd7f549a21c40e5e43ffcc5fbc5f48683d9b24750f26e8079d772
+Status: Downloaded newer image for jenkins/jenkins:lts
+docker.io/jenkins/jenkins:lts
+
+C:\Users\niran>docker run --name jenkins -u root -d -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
+767c6fa3e0efe01b8317f35245dc3ed90817125a32bc2745145caf7e79d09bb2
+
+C:\Users\niran>docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+2da70605acc24aa8b489c0331e87982a
+
+Then copy this password and paste in jenkins starting then create new password...then restart jenkins
+
+
+C:\Users\niran>docker stop jenkins
+jenkins
+
+C:\Users\niran>docker rm jenkins
+jenkins
+--------------------------------------------------------
+--------------------------------------------------------
+How to Trigger the Jenkins Pipeline::-
+---------------------------------------
+
+Once you’ve pushed your changes to GitHub, you can set up Jenkins to automatically trigger the pipeline or run it manually.
+
+Option 1: Set up GitHub webhook (optional)
+If you want Jenkins to automatically trigger on every commit, you can set up a webhook on GitHub to notify Jenkins about changes in your repository. Here’s how:
+
+Go to your Jenkins job (e.g., SpringBoot-Pipeline).
+
+Under Build Triggers, enable GitHub hook trigger for GITScm polling.
+
+Go to GitHub → Settings → Webhooks → Add webhook.
+
+In the Payload URL, add the Jenkins webhook URL (e.g., http://your-jenkins-url/github-webhook/).
+
+Make sure to select the push event.

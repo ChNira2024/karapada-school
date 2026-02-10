@@ -1,0 +1,13 @@
+Microsoft Windows [Version 10.0.26200.7623]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\niran>netstat -ano | findstr :8080
+  TCP    [::1]:8080             [::1]:50249            FIN_WAIT_2      24492
+  TCP    [::1]:8080             [::1]:63427            FIN_WAIT_2      24492
+  TCP    [::1]:50249            [::1]:8080             CLOSE_WAIT      4336
+  TCP    [::1]:63427            [::1]:8080             CLOSE_WAIT      4336
+
+C:\Users\niran>taskkill /F /PID 4336
+SUCCESS: The process with PID 4336 has been terminated.
+
+C:\Users\niran>
