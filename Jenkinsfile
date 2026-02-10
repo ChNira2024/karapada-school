@@ -19,10 +19,10 @@ pipeline {
 
         stage('Build Spring Boot App') {
             steps {
-                // Use official Maven + JDK image from Docker Hub
+                // Use official Maven + JDK image from Docker Hub (valid tag)
                 sh '''
-                    docker pull maven:3.9.2-jdk-17 || true
-                    docker run --rm -v $PWD:/app -w /app maven:3.9.2-jdk-17 \
+                    docker pull maven:3.9.2-jdk-17-slim || true
+                    docker run --rm -v $PWD:/app -w /app maven:3.9.2-jdk-17-slim \
                     mvn clean package -DskipTests
                 '''
             }
@@ -37,7 +37,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Stop and remove old container if exists
+                    // Stop and remove old container if it exists
                     sh "docker rm -f ${DOCKER_CONTAINER} || true"
 
                     // Run new container with port mapping
