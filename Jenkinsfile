@@ -13,15 +13,8 @@ pipeline {
         stage('Build Spring Boot App') {
             steps {
                 sh '''
-                  echo "Workspace contents:"
-                  ls -la
-
-                  docker run --rm \
-                    -v $PWD:/app \
-                    -v $HOME/.m2:/root/.m2 \
-                    -w /app \
-                    maven:3.9.9-eclipse-temurin-17 \
-                    mvn clean package -DskipTests
+                  chmod +x mvnw
+                  ./mvnw clean package -DskipTests
                 '''
             }
         }
@@ -48,7 +41,7 @@ pipeline {
     post {
         success {
             echo '✅ Pipeline completed successfully!'
-            echo '🌍 App URL: http://localhost:2424'
+            echo '🌍 Application running at http://localhost:2424'
         }
         failure {
             echo '❌ Pipeline failed! Check logs.'
