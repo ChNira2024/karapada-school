@@ -25,6 +25,7 @@ public class StudentController {
 
     @PostMapping("/add-student")
     public Student createStudent(@RequestBody Student student) {
+    	System.out.println("studen"+student);
         return iStudentService.saveStudent(student);
     }
 
