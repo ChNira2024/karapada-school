@@ -136,6 +136,18 @@ docker start karapada-school-jenkins
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 Run Jenkins  inside docker::-
 ---------------------------
 C:\Users\niran>docker pull jenkins/jenkins:lts
