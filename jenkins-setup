@@ -1,3 +1,141 @@
+Steps to Create Jenkins as Container inside Docker and run it(Docker present in my windows laptop)::-
+================================================================================================
+Step 1: Remove existing Jenkins container
+docker stop karapada-school-jenkins
+docker rm karapada-school-jenkins
+C:\Users\niran>docker stop karapada-school-jenkins
+karapada-school-jenkins
+
+C:\Users\niran>docker rm karapada-school-jenkins
+karapada-school-jenkins
+
+Step 2: Run Jenkins WITH Docker CLI installation
+Run exactly this:
+docker run -d ^
+  -p 8080:8080 ^
+  -p 50000:50000 ^
+  -v jenkins_home:/var/jenkins_home ^
+  -v //var/run/docker.sock:/var/run/docker.sock ^
+  -u root ^
+  --name karapada-school-jenkins ^
+  jenkins/jenkins:lts-jdk17
+
+C:\Users\niran>docker run -d ^
+More?   -p 8080:8080 ^
+More?   -p 50000:50000 ^
+More?   -v jenkins_home:/var/jenkins_home ^
+More?   -v //var/run/docker.sock:/var/run/docker.sock ^
+More?   -u root ^
+More?   --name karapada-school-jenkins ^
+More?   jenkins/jenkins:lts-jdk17
+
+Unable to find image 'jenkins/jenkins:lts-jdk17' locally
+lts-jdk17: Pulling from jenkins/jenkins
+5a0f9b11b5fb: Pull complete
+4c4b9af5e19f: Pull complete
+8f54ed283e9f: Pull complete
+1b636fb45dbc: Pull complete
+5261b5445fdb: Download complete
+Digest: sha256:60b80d3602d6789f0be67fa9ebc435413ca49e76aced52ff7d27f8f1c935ccf9
+Status: Downloaded newer image for jenkins/jenkins:lts-jdk17
+74dae4734b78a32f63ed1c19ef9eeba8e368b644c4391bc7b48080d6a4406b36
+
+Step 3: Install Docker CLI INSIDE Jenkins container
+docker exec -it karapada-school-jenkins bash
+
+Inside container, run:-
+apt-get update
+apt-get install -y docker.io
+
+C:\Users\niran>docker exec -it karapada-school-jenkins bash
+root@74dae4734b78:/# apt-get update
+apt-get install -y docker.io
+Get:1 http://deb.debian.org/debian trixie InRelease [140 kB]
+Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]
+Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [104 kB]
+Fetched 10.0 MB in 1s (8227 kB/s)
+
+
+Verify: docker version
+
+root@74dae4734b78:/# docker version
+Client:
+ Version:           26.1.5+dfsg1
+ API version:       1.45
+ Go version:        go1.24.4
+ Git commit:        a72d7cd
+ Built:             Fri Jan  2 14:41:00 2026
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Desktop 4.59.0 (217644)
+ Engine:
+  Version:          29.2.0
+  API version:      1.53 (minimum version 1.44)
+  Go version:       go1.25.6
+  Git commit:       9c62384
+  Built:            Mon Jan 26 19:26:07 2026
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v2.2.1
+  GitCommit:        dea7da592f5d1d2b7755e3a161be07f43fad8f75
+ runc:
+  Version:          1.3.4
+  GitCommit:        v1.3.4-0-gd6d73eb8
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+root@74dae4734b78:/#
+
+This output means your setup is now 100% CORRECT.
+✅ What This Confirms (Very Important)
+
+From your output:
+✔ Docker CLI is available
+Client:
+ Version: 26.1.5
+✔ Jenkins can talk to Docker daemon
+Server: Docker Desktop 4.59.0
+ Engine Version: 29.2.0
+✔ Docker socket is mounted correctly
+Context: default
+
+------------------------------------------------------------------------
+🟢 FINAL STATUS
+Component	                 Status
+Docker Desktop (WSL2)	    ✅ Running
+Jenkins in Docker	        ✅ Running
+Docker socket mounted	    ✅
+Docker CLI inside Jenkins	✅
+Jenkins → Docker access	    ✅
+🔥 This is EXACTLY how real CI/CD agents work
+
+=>Once jenkins ready , execute below command::- NEXT STEPS (DO THESE IN ORDER)
+STEP 1: Open Jenkins & Initial Setup
+Open browser:http://localhost:8080
+If it asks for password: docker exec karapada-school-jenkins \ cat /var/jenkins_home/secrets/initialAdminPassword
+
+root@74dae4734b78:/# docker exec karapada-school-jenkins \
+cat /var/jenkins_home/secrets/initialAdminPassword
+f06f7d1172be4ad6955712db81feb2ff
+root@74dae4734b78:/#
+=>paste this password in default and create new user for jenkins , once done start jenkins...
+=>Install Required Jenkins Plugins
+Go to: Manage Jenkins → Plugins → Available->Install:✅ Docker Pipeline
+=>Then click build now in jenkins..
+
+Restart/Start/Stop jenkins::-
+----------------------------
+docker restart karapada-school-jenkins (cmd) or http://localhost:8080/restart
+docker stop karapada-school-jenkins
+docker start karapada-school-jenkins
+
+
+
 Run Jenkins  inside docker::-
 ---------------------------
 C:\Users\niran>docker pull jenkins/jenkins:lts
@@ -59,3 +197,22 @@ Go to GitHub → Settings → Webhooks → Add webhook.
 In the Payload URL, add the Jenkins webhook URL (e.g., http://your-jenkins-url/github-webhook/).
 
 Make sure to select the push event.
+
+-------------------------------------------------
+C:\Users\niran>docker ps
+CONTAINER ID   IMAGE                 COMMAND                  CREATED             STATUS             PORTS                                                                                          NAMES
+3ec823672d39   jenkins/jenkins:lts   "/usr/bin/tini -- /u…"   About an hour ago   Up About an hour   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp, 0.0.0.0:50000->50000/tcp, [::]:50000->50000/tcp   karapada-school-jenkins
+
+
+C:\Users\niran>docker exec -it karapada-school-jenkins bash
+jenkins@3ec823672d39:/$ docker version
+Client: Docker Engine - Community
+ Version:           29.2.1
+ API version:       1.53
+ Go version:        go1.25.6
+ Git commit:        a5c7197
+ Built:             Mon Feb  2 17:17:31 2026
+ OS/Arch:           linux/amd64
+ Context:           default
+permission denied while trying to connect to the docker API at unix:///var/run/docker.sock
+jenkins@3ec823672d39:/$
