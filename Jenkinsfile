@@ -10,16 +10,12 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git branch: 'master',
-                    url: 'https://github.com/ChNira2024/karapada-school.git'
-            }
-        }
-
         stage('Build Spring Boot App') {
             steps {
                 sh '''
+                  echo "Workspace contents:"
+                  ls -la
+
                   docker run --rm \
                     -v $PWD:/app \
                     -v $HOME/.m2:/root/.m2 \
@@ -52,6 +48,7 @@ pipeline {
     post {
         success {
             echo '✅ Pipeline completed successfully!'
+            echo '🌍 App URL: http://localhost:2424'
         }
         failure {
             echo '❌ Pipeline failed! Check logs.'
