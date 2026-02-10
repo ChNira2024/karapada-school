@@ -2,10 +2,11 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'karapada-school'
-        DOCKER_TAG = 'latest'
+        DOCKER_IMAGE     = 'karapada-school'
+        DOCKER_TAG       = 'latest'
         DOCKER_CONTAINER = 'karapada-school'
-        APP_PORT = '2424'
+        CONTAINER_PORT   = '2424'
+        HOST_PORT        = '2425'
     }
 
     stages {
@@ -21,16 +22,20 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                sh '''
+                  docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+                '''
             }
         }
 
         stage('Run Docker Container') {
             steps {
                 sh '''
-                  docker rm -f ${DOCKER_CONTAINER} || true
+                  docker stop ${DOCKER_CONTAINER} || true
+                  docker rm ${DOCKER_CONTAINER} || true
+
                   docker run -d \
-                    -p ${APP_PORT}:${APP_PORT} \
+                    -p ${HOST_PORT}:${CONTAINER_PORT} \
                     --name ${DOCKER_CONTAINER} \
                     ${DOCKER_IMAGE}:${DOCKER_TAG}
                 '''
@@ -41,10 +46,10 @@ pipeline {
     post {
         success {
             echo '✅ Pipeline completed successfully!'
-            echo '🌍 Application running at http://localhost:2424'
+            echo "🌍 Application running at http://localhost:${HOST_PORT}"
         }
         failure {
-            echo '❌ Pipeline failed! Check logs.'
+            echo '❌ Pipeline failed! Check Jenkins logs.'
         }
     }
 }
