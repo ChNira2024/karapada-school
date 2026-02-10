@@ -2,7 +2,8 @@ pipeline {
     agent any  // Run inside Jenkins container
 
     environment {
-        DOCKER_HOST = 'tcp://host.docker.internal:2375' // Connect to Windows Docker
+        // Point to Windows Docker daemon
+        DOCKER_HOST = 'tcp://host.docker.internal:2375'
         DOCKER_IMAGE = 'karapada-school'
         DOCKER_TAG = 'latest'
         DOCKER_CONTAINER = 'karapada-school'
@@ -18,9 +19,10 @@ pipeline {
 
         stage('Build Spring Boot App') {
             steps {
-                // Build using Maven inside a temporary Docker container
+                // Use official Maven + JDK image from Docker Hub
                 sh '''
-                    docker run --rm -v $PWD:/app -w /app maven:3.9.2-openjdk-17 \
+                    docker pull maven:3.9.2-jdk-17 || true
+                    docker run --rm -v $PWD:/app -w /app maven:3.9.2-jdk-17 \
                     mvn clean package -DskipTests
                 '''
             }
@@ -35,7 +37,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Stop and remove old container if it exists
+                    // Stop and remove old container if exists
                     sh "docker rm -f ${DOCKER_CONTAINER} || true"
 
                     // Run new container with port mapping
