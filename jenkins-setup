@@ -19,11 +19,15 @@ Digest: sha256:d1ea795c6facd7f549a21c40e5e43ffcc5fbc5f48683d9b24750f26e8079d772
 Status: Downloaded newer image for jenkins/jenkins:lts
 docker.io/jenkins/jenkins:lts
 
-C:\Users\niran>docker run --name jenkins -u root -d -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
-767c6fa3e0efe01b8317f35245dc3ed90817125a32bc2745145caf7e79d09bb2
+C:\Users\niran>docker run -d --name karapada-school-jenkins -p 8080:8080 -p 50000:50000 -v jenkins_home2:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkins/jenkins:lts
+3ec823672d397b6707190aba78f22dfe478f113e1390621f4980e83b282ab807
 
-C:\Users\niran>docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
-2da70605acc24aa8b489c0331e87982a
+C:\Users\niran>docker ps
+CONTAINER ID   IMAGE                 COMMAND                  CREATED         STATUS         PORTS                                                                                          NAMES
+3ec823672d39   jenkins/jenkins:lts   "/usr/bin/tini -- /u…"   8 seconds ago   Up 9 seconds   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp, 0.0.0.0:50000->50000/tcp, [::]:50000->50000/tcp   karapada-school-jenkins
+
+C:\Users\niran>docker exec karapada-school-jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+e2110a2799bd4d2bae5f366b7b04dd29
 
 Then copy this password and paste in jenkins starting then create new password...then restart jenkins
 
