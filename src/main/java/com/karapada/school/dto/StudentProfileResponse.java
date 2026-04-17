@@ -1,23 +1,24 @@
-package com.karapada.school.entity;
+package com.karapada.school.dto;
 
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import lombok.Data;
 
-
-
-@Entity
 @Data
-public class Student extends BaseUser {
+public class StudentProfileResponse {
 
-	@Column(name = "admission_number")
+    private Long id;
+    private String username;
+    private String fullName;
+    private String email;
+    private String phone;
+
     private String admissionNumber;
     private LocalDate dateOfBirth;
     private String gender;
     private String bloodGroup;
+
     private String parentName;
     private String parentContact;
 }

@@ -1,0 +1,21 @@
+For Swagger Configuration,In spring boot parent version upto 4.1 with java 17
+✅ Maven Dependencies for Spring Boot 4.x
+
+1. Swagger UI starter (WebMVC) – this is all you need for most REST APIs:
+
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>3.0.1</version>
+</dependency>
+
+
+This gives you:
+OpenAPI 3 spec generation (/v3/api-docs)
+Swagger UI at /swagger-ui.html or /swagger-ui/index.html
+
+| Purpose      | URL                                           |
+| ------------ | --------------------------------------------- |
+| Swagger UI   | `http://localhost:2424/swagger-ui/index.html` |
+| OpenAPI JSON | `http://localhost:2424/v3/api-docs`           |
+

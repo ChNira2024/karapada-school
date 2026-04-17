@@ -1,0 +1,40 @@
+Headmaster (ADMIN ROLE)
+========================
+Headmaster controls the entire school
+Responsibilities
+--------------
+School profile management
+Teacher hiring & mapping to subjects
+Student admission & class allocation
+Academic year management
+Class & section creation
+Subject creation
+Teacher-class-subject mapping
+Exam & timetable approval
+Attendance & marks monitoring
+Reports (pass %, attendance %, fee status)
+User access control
+
+Teacher
+===================
+Teacher handles academic execution
+Responsibilities
+--------------
+View assigned classes & subjects
+Mark daily attendance
+Upload marks (exam-wise)
+Upload assignments
+View student performance
+Communicate with parents
+
+Student
+============================
+Student consumes academic services
+Responsibilities
+---------------
+View personal profile
+View timetable
+View attendance
+View marks & report card
+Download assignments
+Notifications
